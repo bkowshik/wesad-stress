@@ -20,7 +20,10 @@ Reference: Schmidt et al., "Introducing WESAD", ICMI 2018. Available via the UCI
 ```bash
 uv sync
 uv run python scripts/smoke_test_mlflow.py
-uv run mlflow ui --backend-store-uri sqlite:///mlflow.db
+uv run mlflow ui \
+  --backend-store-uri sqlite:///mlflow.db \
+  --host 127.0.0.1 \
+  --allowed-hosts 127.0.0.1:5000,localhost:5000
 ```
 
 Python 3.11. Dependencies pinned via `uv.lock`.

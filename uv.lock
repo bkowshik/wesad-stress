@@ -2790,15 +2790,15 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ipykernel", specifier = ">=6.29" },
-    { name = "jupyter", specifier = ">=1.0" },
-    { name = "matplotlib", specifier = ">=3.9" },
-    { name = "mlflow", specifier = ">=2.13" },
-    { name = "mne", specifier = ">=1.7" },
-    { name = "pandas", specifier = ">=2.2" },
-    { name = "pyarrow", specifier = ">=16.0" },
-    { name = "scikit-learn", specifier = ">=1.5" },
-    { name = "torch", specifier = ">=2.3" },
+    { name = "ipykernel", specifier = ">=7.2" },
+    { name = "jupyter", specifier = ">=1.1" },
+    { name = "matplotlib", specifier = ">=3.10" },
+    { name = "mlflow", specifier = ">=3.12" },
+    { name = "mne", specifier = ">=1.12" },
+    { name = "pandas", specifier = ">=2.3" },
+    { name = "pyarrow", specifier = ">=23.0" },
+    { name = "scikit-learn", specifier = ">=1.8" },
+    { name = "torch", specifier = ">=2.12" },
 ]
 
 [[package]]
