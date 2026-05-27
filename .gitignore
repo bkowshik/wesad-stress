@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# uv
+.venv/
+
+# MLflow
+mlruns/
+mlflow.db
+mlflow.db-*
+
+# Data — never commit
+data/raw/
+data/processed/
+*.pkl
+*.parquet
+*.h5
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
