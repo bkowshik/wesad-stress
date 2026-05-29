@@ -2,10 +2,6 @@
 
 ## Upcoming
 
-### Data ingest
-
-Implement `load_wesad()` to read a single subject's pickle file from `data/raw/WESAD/`. The dataset packages chest sensors (RespiBAN @ 700 Hz — ECG, EDA, EMG, respiration, temperature, 3-axis accelerometer) and wrist sensors (Empatica E4 at mixed rates) per subject; the loader returns both, with labels mapped per the dataset documentation (1=baseline, 2=stress, 3=amusement, 4=meditation; 0/5/6/7 are ignore/transition states). Companion EDA notebook follows — distributions per modality, label balance per subject, signal-quality checks across the two devices.
-
 ### Preprocessing and splits
 
 60-second windows with overlap, leave-one-subject-out (LOSO) cross-validation as the primary protocol. Both classical features (HRV from ECG, phasic + tonic decomposition from EDA, respiration-rate features) and raw windowed signals get prepared — they feed different model families and the comparison is part of the point.
@@ -22,6 +18,22 @@ The more interesting axis. Classical pipelines (HRV / SCR features fed into logi
 
 Once results land, fill in the README's Why and Results sections, and write a longer-form blog post linked from there. Emphasis on what was surprising rather than the headline accuracy number.
 
+## 2026-05-28
+
+### Download
+
+The UCI "WESAD.zip" download link is a 261-byte stub containing a sciebo redirect URL — and the token in that stub is stale as of 2026. The live download is on the [Siegen lab's official page](https://ubi29.informatik.uni-siegen.de/usi/data_wesad.html), which currently points at `https://uni-siegen.sciebo.de/s/HGdUkoNlW1Ub0Gx/download`. Sciebo's download endpoint also doesn't send a useful `Content-Length`, so curl's `--progress-bar` flag silently produces no visible progress; the default progress meter (no flag) shows live bytes and rate. README has the corrected one-liner.
+
+### Data ingest
+
+`load_wesad()` ships, `docs/SCHEMA.md` documents the contract it returns. Subject S2 round-trips through the loader cleanly — chest at 700 Hz across all six modalities, wrist at the published per-sensor rates (32 / 64 / 4 / 4 Hz), label distribution matches the documented protocol. Notebook `notebooks/00-load-one-subject.ipynb` exercises the loader end-to-end and saves 10-second baseline plots for both devices.
+
+A few surprises while writing the schema doc. Chest sessions are ~100 minutes long, not the ~60 I'd lazily assumed. `chest/Temp` is `float32` while every other chest signal is `float64`. Wrist ACC is exposed as raw int8 counts (±128), not g-units. And label 0 (transient) is roughly half the recording — most of a WESAD session is protocol setup, instructions, and inter-block transitions, not modelling-grade data. Anything that doesn't filter on label first will be modelling mostly transients.
+
+| Chest | Wrist |
+|---|---|
+| ![S2 chest 10s baseline](./images/2026-05-28-s2-chest-10s-baseline.png) | ![S2 wrist 10s baseline](./images/2026-05-28-s2-wrist-10s-baseline.png) |
+
 ## 2026-05-27
 
 ### Middleware
@@ -29,8 +41,6 @@ Once results land, fill in the README's Why and Results sections, and write a lo
 MLflow 3.x's security middleware rejects any request whose port-qualified Host header (e.g. 127.0.0.1:5000) isn't in `--allowed-hosts`, so the allowlist must include the port — otherwise the UI returns `403 Invalid Host` header.
 
 ```bash
-cd /Users/bkowshik/code/bkowshik/wesad-stress
-
 uv run mlflow ui \
   --backend-store-uri sqlite:///mlflow.db \
   --host 127.0.0.1 \
