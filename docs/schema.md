@@ -57,6 +57,8 @@ The wrist device samples each modality at its own rate. A 60-minute session prod
 
 The wrist EDA at 4 Hz is the lowest-resolution channel in the dataset; any model that fuses chest and wrist EDA has to decide between upsampling the wrist signal or downsampling the chest signal to a common grid. That decision belongs in the preprocessing pipeline, not here.
 
+For a plain-language description of what each modality actually measures (BVP, ECG, EDA, EMG, Resp, Temp, ACC), see [`glossary.md`](./glossary.md).
+
 ## Labels
 
 The label array carries integer codes at the chest rate (700 Hz). The full code book per Schmidt et al. is:
@@ -114,3 +116,7 @@ The baseline pipeline works from the pickle only. The questionnaires become rele
 - `load_wesad(subject_id)` returns the dict above unchanged — no flattening, no resampling, no label remapping. Those transforms live in `preprocess.py` (not yet written).
 - Any feature extractor that expects e.g. ECG at 700 Hz with shape `(N, 1)` can rely on the contract here; if a future loader switches to flattened `(N,)`, this doc gets updated and the change is announced in `CHANGELOG.md`.
 - Subjects S1 and S12 are out of scope. `VALID_SUBJECTS` is the canonical list.
+
+---
+
+The derived feature table built from this raw contract — windowing rules, row identity, and the 19 feature columns — is documented separately in [`features.md`](./features.md), since it tracks the code in `features.py` and changes on a different cadence than this fixed dataset contract.

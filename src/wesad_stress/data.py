@@ -3,7 +3,7 @@
 The WESAD dataset is not included in this repo. Download from the UCI
 ML Repository (dataset 465) and unzip into `data/raw/WESAD/` — one
 folder per subject (S2/, S3/, ..., S17/). See the README for the
-download command and `docs/SCHEMA.md` for the data contract returned
+download command and `docs/schema.md` for the data contract returned
 by `load_wesad()`.
 """
 
@@ -33,7 +33,7 @@ def load_wesad(subject_id: int) -> dict[str, Any]:
         EMG, Resp, Temp, ACC) and ``'wrist'`` (Empatica E4: BVP, EDA, TEMP,
         ACC) sub-dicts. ``label`` is an int array sampled at 700 Hz
         (1=baseline, 2=stress, 3=amusement, 4=meditation;
-        0/5/6/7=transient/ignore). Full contract: ``docs/SCHEMA.md``.
+        0/5/6/7=transient/ignore). Full contract: ``docs/schema.md``.
 
     Raises
     ------

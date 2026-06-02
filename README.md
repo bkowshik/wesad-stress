@@ -13,7 +13,7 @@ WESAD (Wearable Stress and Affect Detection) — multimodal physiological record
 - Chest (RespiBAN @ 700 Hz): ECG, EDA, EMG, respiration, temperature, 3-axis accel
 - Wrist (Empatica E4): BVP @ 64 Hz, EDA @ 4 Hz, temp @ 4 Hz, accel @ 32 Hz
 
-Reference: Schmidt et al., [*Introducing WESAD, a Multimodal Dataset for Wearable Stress and Affect Detection*](https://dl.acm.org/doi/pdf/10.1145/3242969.3242985), ICMI 2018. Hosted on the [UCI ML Repository (dataset 465)](https://archive.ics.uci.edu/dataset/465/wesad+wearable+stress+and+affect+detection). Schema contract: [`docs/SCHEMA.md`](./docs/SCHEMA.md).
+Reference: Schmidt et al., [*Introducing WESAD, a Multimodal Dataset for Wearable Stress and Affect Detection*](https://dl.acm.org/doi/pdf/10.1145/3242969.3242985), ICMI 2018. Hosted on the [UCI ML Repository (dataset 465)](https://archive.ics.uci.edu/dataset/465/wesad+wearable+stress+and+affect+detection). Schema contract: [`docs/schema.md`](./docs/schema.md).
 
 ## Setup
 

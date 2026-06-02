@@ -9,6 +9,7 @@ dependencies = [
     "mne>=1.12",
     "mlflow>=3.12",
     "pandas>=2.3",
+    "scipy>=1.17",
     "scikit-learn>=1.8",
     "matplotlib>=3.10",
     "pyarrow>=23.0",
